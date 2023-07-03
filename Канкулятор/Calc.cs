@@ -8,67 +8,67 @@ namespace Канкулятор
 {
     public class Calc : InterfaceCalc
     {
-        private double a = 0;
+        
         private double memory = 0;
+        
 
-        public void Put_A(double a)
+
+        public double Multiplication(double c,double b)
         {
-            this.a = a;
+            c *= b;
+            return c ;
+            
         }
 
-        public void Clear_A()
+        public double Division(double c,double b)
         {
-            a = 0;
+            c /= b;
+            return c ;
         }
 
-        public double Multiplication(double b)
+        public double Sum(double c, double b)
         {
-            return a * b;
+            c += b;
+            return c ;
         }
 
-        public double Division(double b)
+        public double Subtraction(double c, double b) //вычитание
         {
-            return a / b;
+            c -= b;
+            return c ;
         }
 
-        public double Sum(double b)
+        public double SqrtX(double c, double b)
         {
-            return a + b;
+            c = Math.Pow(c, 1 / b);
+            return c;
         }
 
-        public double Subtraction(double b) //вычитание
+        public double DegreeY(double c, double b)
         {
-            return a - b;
+            c = Math.Pow(c, b);
+            return c;
         }
 
-        public double SqrtX(double b)
+        public double Sqrt(double c)
         {
-            return Math.Pow(a, 1 / b);
+            
+            return Math.Sqrt(c);
         }
 
-        public double DegreeY(double b)
-        {
-            return Math.Pow(a, b);
+        public double Square(double c)
+        {   
+            return Math.Pow(c, 2.0);
         }
 
-        public double Sqrt()
-        {
-            return Math.Sqrt(a);
-        }
-
-        public double Square()
-        {
-            return Math.Pow(a, 2.0);
-        }
-
-        public double Factorial()
+        public double Factorial(double c)
         {
             double f = 1;
 
-            for (int i = 1; i <= a; i++)
+            for (int i = 1; i <= c; i++)
                 f *= (double)i;
-
-            return f;
+            
+            return  f;
         }
 
         //показать содержимое регистра мамяти

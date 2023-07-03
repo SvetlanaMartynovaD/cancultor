@@ -15,6 +15,9 @@ namespace Канкулятор
         Calc C;
 
         int k; //количество нажатий кнопки MRC
+        string znak = "";
+        double a = 0;
+
 
         public Form1()
         {
@@ -30,9 +33,7 @@ namespace Канкулятор
         {
             labelNumber.Text = "0";
 
-            C.Clear_A();
-            FreeButtons();
-
+            a=0;
             k = 0;
         }
 
@@ -51,76 +52,16 @@ namespace Канкулятор
                 labelNumber.Text += ",";
         }
 
-        private void button0_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "0";
-
-            CorrectNumber();
-        }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
-            labelNumber.Text += "1";
+            labelNumber.Text += (sender as Button).Text;
 
             CorrectNumber();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "2";
-
-            CorrectNumber();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "3";
-
-            CorrectNumber();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "4";
-
-            CorrectNumber();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "5";
-
-            CorrectNumber();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "6";
-
-            CorrectNumber();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "7";
-
-            CorrectNumber();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "8";
-
-            CorrectNumber();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            labelNumber.Text += "9";
-
-            CorrectNumber();
-        }
-
+        
         //удаляем лишний ноль впереди числа, если таковой имеется
         private void CorrectNumber()
         {
@@ -143,28 +84,29 @@ namespace Канкулятор
         //кнопка Равно
         private void buttonCalc_Click(object sender, EventArgs e)
         {
-            if (!buttonMult.Enabled)
-                labelNumber.Text = C.Multiplication(Convert.ToDouble(labelNumber.Text)).ToString();
-
-            if (!buttonDiv.Enabled)
-                labelNumber.Text = C.Division(Convert.ToDouble(labelNumber.Text)).ToString();
-
-            if (!buttonPlus.Enabled)
-                labelNumber.Text = C.Sum(Convert.ToDouble(labelNumber.Text)).ToString();
-
-            if (!buttonMinus.Enabled)
-                labelNumber.Text = C.Subtraction(Convert.ToDouble(labelNumber.Text)).ToString();
-
-            if (!buttonSqrtX.Enabled)
-                labelNumber.Text = C.SqrtX(Convert.ToDouble(labelNumber.Text)).ToString();
-
-            if (!buttonDegreeY.Enabled)
-                labelNumber.Text = C.DegreeY(Convert.ToDouble(labelNumber.Text)).ToString();
-
-            C.Clear_A();
-            FreeButtons();
-
+            switch (znak)
+            {
+                case "*": labelNumber.Text = C.Multiplication(a,Convert.ToDouble(labelNumber.Text)).ToString();
+                    break;
+                case "/": labelNumber.Text = C.Division(a,Convert.ToDouble(labelNumber.Text)).ToString();
+                    break;
+                case "+":
+                    labelNumber.Text = C.Sum(a,Convert.ToDouble(labelNumber.Text)).ToString();
+                    break;
+                case "-":
+                    labelNumber.Text = C.Subtraction(a,Convert.ToDouble(labelNumber.Text)).ToString();
+                    break;
+                case "SqrtX":
+                    labelNumber.Text = C.SqrtX(a,Convert.ToDouble(labelNumber.Text)).ToString();
+                    break;
+                case "DegreeY":
+                    labelNumber.Text = C.DegreeY(a,Convert.ToDouble(labelNumber.Text)).ToString();
+                    break;
+            }
+            znak = "";
+            a=0;
             k = 0;
+           
         }
 
 
@@ -174,127 +116,260 @@ namespace Канкулятор
         //кнопка Умножение
         private void buttonMult_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+            if (znak != "")
             {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
-
-                buttonMult.Enabled = false;
-
-                labelNumber.Text = "0";
+                switch (znak)
+                {
+                    case "*":
+                        labelNumber.Text = C.Multiplication(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "/":
+                        labelNumber.Text = C.Division(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "+":
+                        labelNumber.Text = C.Sum(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "-":
+                        labelNumber.Text = C.Subtraction(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "SqrtX":
+                        labelNumber.Text = C.SqrtX(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "DegreeY":
+                        labelNumber.Text = C.DegreeY(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                }
             }
+            a =Convert.ToDouble(labelNumber.Text);
+            znak = "*";
+            labelNumber.Text = "0";
+            
         }
 
         //кнопка Деление
         private void buttonDiv_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+
+            if (znak != "")
             {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
-
-                buttonDiv.Enabled = false;
-
-                labelNumber.Text = "0";
+                switch (znak)
+                {
+                    case "*":
+                        labelNumber.Text = C.Multiplication(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "/":
+                        labelNumber.Text = C.Division(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "+":
+                        labelNumber.Text = C.Sum(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "-":
+                        labelNumber.Text = C.Subtraction(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "SqrtX":
+                        labelNumber.Text = C.SqrtX(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "DegreeY":
+                        labelNumber.Text = C.DegreeY(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                }
             }
+            a = Convert.ToDouble(labelNumber.Text);
+
+            znak = "/";
+
+            labelNumber.Text = "0";
+            
         }
 
         //кнопка Сложение
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+
+            if (znak != "")
             {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
-
-                buttonPlus.Enabled = false;
-
-                labelNumber.Text = "0";
+                switch (znak)
+                {
+                    case "*":
+                        labelNumber.Text = C.Multiplication(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "/":
+                        labelNumber.Text = C.Division(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "+":
+                        labelNumber.Text = C.Sum(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "-":
+                        labelNumber.Text = C.Subtraction(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "SqrtX":
+                        labelNumber.Text = C.SqrtX(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "DegreeY":
+                        labelNumber.Text = C.DegreeY(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                }
             }
+            a = Convert.ToDouble(labelNumber.Text);
+            znak = "+";
+
+            labelNumber.Text = "0";
+            
         }
 
         //кнопка Вычитание
         private void buttonMinus_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+            if (znak != "")
             {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
-
-                buttonMinus.Enabled = false;
-
-                labelNumber.Text = "0";
+                switch (znak)
+                {
+                    case "*":
+                        labelNumber.Text = C.Multiplication(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "/":
+                        labelNumber.Text = C.Division(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "+":
+                        labelNumber.Text = C.Sum(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "-":
+                        labelNumber.Text = C.Subtraction(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "SqrtX":
+                        labelNumber.Text = C.SqrtX(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "DegreeY":
+                        labelNumber.Text = C.DegreeY(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                }
             }
+            a = Convert.ToDouble(labelNumber.Text);
+
+            znak = "-";
+
+            labelNumber.Text = "0";
+            
         }
 
         //кнопка Корень произвольной степени
         private void buttonSqrtX_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+            if (znak != "")
             {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
-
-                buttonSqrtX.Enabled = false;
-
-                labelNumber.Text = "0";
+                switch (znak)
+                {
+                    case "*":
+                        labelNumber.Text = C.Multiplication(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "/":
+                        labelNumber.Text = C.Division(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "+":
+                        labelNumber.Text = C.Sum(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "-":
+                        labelNumber.Text = C.Subtraction(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "SqrtX":
+                        labelNumber.Text = C.SqrtX(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "DegreeY":
+                        labelNumber.Text = C.DegreeY(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                }
             }
+
+            a = Convert.ToDouble(labelNumber.Text);
+
+            znak = "SqrtX";
+
+            labelNumber.Text = "0";
+            
         }
 
         //кнопка Возведение в произвольную степень
         private void buttonDegreeY_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+            if (znak != "")
             {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
-
-                buttonDegreeY.Enabled = false;
-
-                labelNumber.Text = "0";
+                switch (znak)
+                {
+                    case "*":
+                        labelNumber.Text = C.Multiplication(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "/":
+                        labelNumber.Text = C.Division(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "+":
+                        labelNumber.Text = C.Sum(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "-":
+                        labelNumber.Text = C.Subtraction(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "SqrtX":
+                        labelNumber.Text = C.SqrtX(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                    case "DegreeY":
+                        labelNumber.Text = C.DegreeY(a, Convert.ToDouble(labelNumber.Text)).ToString();
+                        break;
+                }
             }
+            a = Convert.ToDouble(labelNumber.Text);
+
+            znak = "DegreeY";
+
+
+            labelNumber.Text = "0";
+            
         }
 
         //кнопка Корень квадратный
         private void buttonSqrt_Click(object sender, EventArgs e)
         {
-            if (CanPress())
-            {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
 
-                labelNumber.Text = C.Sqrt().ToString();
 
-                C.Clear_A();
-                FreeButtons();
-            }
+            a = Convert.ToDouble(labelNumber.Text);
+
+            labelNumber.Text = C.Sqrt(a).ToString();
+
+            a = 0;
+                
+            
         }
 
         //кнопка Квадрат числа
         private void buttonSquare_Click(object sender, EventArgs e)
         {
-            if (CanPress())
-            {
-                C.Put_A(Convert.ToDouble(labelNumber.Text));
 
-                labelNumber.Text = C.Square().ToString();
 
-                C.Clear_A();
-                FreeButtons();
-            }
+            a = Convert.ToDouble(labelNumber.Text);
+
+            labelNumber.Text = C.Square(a).ToString();
+
+            a = 0;
+             
+            
         }
 
         //кнопка Факториал
         private void buttonFactorial_Click(object sender, EventArgs e)
         {
-            if (CanPress())
-            {
+            
+            
                 if ((Convert.ToDouble(labelNumber.Text) == (int)(Convert.ToDouble(labelNumber.Text))) &&
                     ((Convert.ToDouble(labelNumber.Text) >= 0.0)))
                 {
-                    C.Put_A(Convert.ToDouble(labelNumber.Text));
+                    a=Convert.ToDouble(labelNumber.Text);
 
-                    labelNumber.Text = C.Factorial().ToString();
+                    labelNumber.Text = C.Factorial(a).ToString();
 
-                    C.Clear_A();
-                    FreeButtons();
+                    a = 0;
+                   
                 }
                 else
                     MessageBox.Show("Число должно быть >= 0 и целым!");
-            }
+            
         }
 
         //кнопка М+
@@ -324,21 +399,21 @@ namespace Канкулятор
         //кнопка МRC
         private void buttonMRC_Click(object sender, EventArgs e)
         {
-            if (CanPress())
+            
+          
+            k++;
+
+            if (k == 1)
+                labelNumber.Text = C.MemoryShow().ToString();
+
+            if (k == 2)
             {
-                k++;
+                C.Memory_Clear();
+                labelNumber.Text = "0";
 
-                if (k == 1)
-                    labelNumber.Text = C.MemoryShow().ToString();
-
-                if (k == 2)
-                {
-                    C.Memory_Clear();
-                    labelNumber.Text = "0";
-
-                    k = 0;
-                }
+                k = 0;
             }
+            
         }
 
 
@@ -348,40 +423,7 @@ namespace Канкулятор
 
 
 
-        //проверяет не нажата ли еще какая-либо из кнопок мат.операций
-        private bool CanPress()
-        {
-            if (!buttonMult.Enabled)
-                return false;
-
-            if (!buttonDiv.Enabled)
-                return false;
-
-            if (!buttonPlus.Enabled)
-                return false;
-
-            if (!buttonMinus.Enabled)
-                return false;
-
-            if (!buttonSqrtX.Enabled)
-                return false;
-
-            if (!buttonDegreeY.Enabled)
-                return false;
-
-            return true;
-        }
-
-        //снятие нажатия всех кнопок мат.операций
-        private void FreeButtons()
-        {
-            buttonMult.Enabled = true;
-            buttonDiv.Enabled = true;
-            buttonPlus.Enabled = true;
-            buttonMinus.Enabled = true;
-            buttonSqrtX.Enabled = true;
-            buttonDegreeY.Enabled = true;
-        }
+        
 
         
     }

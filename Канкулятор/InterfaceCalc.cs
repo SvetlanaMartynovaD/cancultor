@@ -9,27 +9,27 @@ namespace Канкулятор
     public interface InterfaceCalc
     {
         //а - первый аргумент, b - второй
-        void Put_A(double a); //сохранить а
+         
 
-        void Clear_A();
+       
 
-        double Multiplication(double b);
+        double Multiplication(double a, double b);
 
-        double Division(double b);
+        double Division(double a,double b);
 
-        double Sum(double b);
+        double Sum(double a,double b);
 
-        double Subtraction(double b); //вычитание
+        double Subtraction(double a,double b); //вычитание
 
-        double SqrtX(double b);
+        double SqrtX(double a,double b);
 
-        double DegreeY(double b);
+        double DegreeY(double a,double b);
 
-        double Sqrt();
+        double Sqrt(double a);
 
-        double Square();
+        double Square(double a);
 
-        double Factorial();
+        double Factorial(double a);
 
         double MemoryShow(); //показать содержимое регистра мамяти
 
